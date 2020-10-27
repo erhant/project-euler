@@ -5,7 +5,7 @@ up = i;
 down = matrixSize - 1 - i;
 */
 void rotate(int** matrix, int matrixSize, int* matrixColSize){
-  int tmp, a, b, c; // a b c to optimize
+  int tmp;
   for (int i = 0; i < matrixSize / 2; i++) {
     for (int j = 0; j < matrixSize - 1 - 2*i; j++) {
       tmp = matrix[i][i + j];
