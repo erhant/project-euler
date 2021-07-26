@@ -1,12 +1,12 @@
-int climbStairs(int n){
+int climbStairs(int n) {
   if (n == 1) return 1;
   if (n == 2) return 2;
   // 2 variable Fibonacci
   int a = 1;
   int b = 2;
-  for (int i = 2; i<n; i++) {
+  for (int i = 2; i < n; i++) {
     b = a + b;
-    a = b - a; // a + b_prev - a = b_prev 
+    a = b - a;  // a + b_prev - a = b_prev
   }
   return b;
 }

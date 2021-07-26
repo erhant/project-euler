@@ -1,21 +1,20 @@
-#define A(r,c) (r) * (n) + (c) // assumes n is defined
+#define A(r, c) (r) * (n) + (c)  // assumes n is defined
 
-int uniquePaths(int m, int n){
-  int* paths = (int *)malloc(m * n * sizeof(int)); // matrix, but allocated as 1D
+int uniquePaths(int m, int n) {
+  int* paths = (int*)malloc(m * n * sizeof(int));  // matrix, but allocated as 1D
   // init borders
-  for (int r = 0; r<m; r++) paths[A(r,0)]=1;
-  for (int c = 1; c<n; c++) paths[A(0,c)]=1;
+  for (int r = 0; r < m; r++) paths[A(r, 0)] = 1;
+  for (int c = 1; c < n; c++) paths[A(0, c)] = 1;
   // dp
-  for (int r = 1; r<m; r++) {
-    for (int c = 1; c<n; c++) {
-      //printf("PATH[r,c-1] %d, PATH[r-1,c] %d\n",paths[A(r,c-1)],paths[A(r-1,c)]);
-      paths[A(r,c)] = paths[A(r-1,c)] + paths[A(r,c-1)];
+  for (int r = 1; r < m; r++) {
+    for (int c = 1; c < n; c++) {
+      // printf("PATH[r,c-1] %d, PATH[r-1,c] %d\n",paths[A(r,c-1)],paths[A(r-1,c)]);
+      paths[A(r, c)] = paths[A(r - 1, c)] + paths[A(r, c - 1)];
     }
   }
-  
-  return paths[A(m-1,n-1)];
-}
 
+  return paths[A(m - 1, n - 1)];
+}
 
 // Pascal Triangle Option
 /*                                       line = m + n - 1
@@ -26,8 +25,8 @@ int uniquePaths(int m, int n){
 //     1  3  3  1            5 4 3 2 1
 //    1  4  6  4  1        1 1 1 1 1 1
 //   1  5  10 10 5  1           (n)
-//      ^ row                
-//                     
+//      ^ row
+//
 //C(line, elem)   = line! / ( (line-elem)! * elem! )  = (line * (line - 1) * ... * (line - elem + 1)) / (elem!)
 //line = m + n - 1
 //elem = n

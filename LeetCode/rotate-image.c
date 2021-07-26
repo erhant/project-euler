@@ -4,10 +4,10 @@ left = i;
 up = i;
 down = matrixSize - 1 - i;
 */
-void rotate(int** matrix, int matrixSize, int* matrixColSize){
+void rotate(int** matrix, int matrixSize, int* matrixColSize) {
   int tmp;
   for (int i = 0; i < matrixSize / 2; i++) {
-    for (int j = 0; j < matrixSize - 1 - 2*i; j++) {
+    for (int j = 0; j < matrixSize - 1 - 2 * i; j++) {
       tmp = matrix[i][i + j];
       matrix[i][i + j] = matrix[matrixSize - 1 - i - j][i];
       matrix[matrixSize - 1 - i - j][i] = matrix[matrixSize - 1 - i][matrixSize - 1 - i - j];

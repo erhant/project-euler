@@ -1,4 +1,4 @@
-int firstMissingPositive(int* nums, int numsSize){
+int firstMissingPositive(int* nums, int numsSize) {
   // 1 - Paint n> nums and non-positive as n+1
   for (int i = 0; i < numsSize; i++) {
     if (nums[i] > numsSize || nums[i] <= 0) {
@@ -9,16 +9,17 @@ int firstMissingPositive(int* nums, int numsSize){
   // treat the number as an index (1-based), and paint the numbers with negative.
   int num;
   for (int i = 0; i < numsSize; i++) {
-    num = (nums[i] < 0) ? -nums[i] : nums[i]; // todo: refactor
+    num = (nums[i] < 0) ? -nums[i] : nums[i];  // todo: refactor
     if (num <= numsSize) {
-      nums[num-1] = (nums[num-1] > 0 ? -nums[num-1] : nums[num-1]); // to avoid duplicate numbers overwriting eachother
-    } 
+      nums[num - 1] =
+          (nums[num - 1] > 0 ? -nums[num - 1] : nums[num - 1]);  // to avoid duplicate numbers overwriting eachother
+    }
   }
   // 3 - Final Search
   for (int i = 0; i < numsSize; i++) {
     if (nums[i] > 0) {
       return i + 1;
-    } 
+    }
   }
   return numsSize + 1;
 }
