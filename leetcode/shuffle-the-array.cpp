@@ -7,22 +7,18 @@ class Solution {
     from = 1;
     hand = nums[1];
     while (assert_i < (2 * n - 1)) {
-      // Calculate index
-      to = (from < n) ? 2 * from : 2 * (from - n) + 1;
-      // printf("TO: %d, FROM: %d, NUMS[TO]: %d\n",to,from,nums[to]);
-      if (nums[from] > 0) {                        // if this index is not place yet
-        lift = abs(nums[to]);                      // lift the target | the lift is always positive thanks to ABS
-        nums[to] = (nums[to] < 0) ? -hand : hand;  // put the value at hand
-        nums[from] = -nums[from];                  // hand is placed, we should keep record of it at it's source
+      to = (from < n) ? 2 * from : 2 * (from - n) + 1;  // calculate index
+      if (nums[from] > 0) {                             // if this index is not place yet
+        lift = abs(nums[to]);                           // lift the target | the lift is always positive thanks to ABS
+        nums[to] = (nums[to] < 0) ? -hand : hand;       // put the value at hand
+        nums[from] = -nums[from];                       // hand is placed, we should keep record of it at it's source
         hand = lift;  // now we work with the lifted value, so our hand is what we just lifted
-        from =
-            to;  // the hand is coming from the index where we just wrote 'to', so in the next iteration this is 'from'
+        from = to;    // the hand is coming from the index where we just wrote 'to', so at next iteration this is 'from'
       } else {
         // This means that we have a cycle, and everything in this cycle is placed correctly.
-        // As a naive solution, go through the array one by one to find non-negative value, which means that index is
-        // not place yet.
+        // As a naive solution, go through the array one by one to find non-negative value,
+        // which means that index is not placed yet.
         while (assert_i < (2 * n - 1)) {
-          // printf("\tA_i: %d\n", assert_i);
           if (nums[assert_i] > 0) {  // this value is not placed yet
             from = assert_i;         // remember where it came from
             hand = nums[from];       // take it in your hand
