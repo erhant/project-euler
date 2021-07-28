@@ -1,3 +1,9 @@
+/*
+topics:
+  - math
+difficulty: easy
+*/
+
 int reverse(int x) {
   int rev = 0, last;
   while (x != 0) {

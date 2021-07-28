@@ -1,3 +1,12 @@
+/*
+tricks:
+
+topics:
+  - stack
+  - string
+difficulty: easy
+*/
+
 class Solution {
  public:
   bool isValid(string s) {

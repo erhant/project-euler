@@ -1,3 +1,11 @@
+/*
+topics:
+  - math
+  - string
+  - hashmap
+difficulty: easy
+*/
+
 int romanToInt(char* s) {
   unsigned short ans = 0;
   char prev = '\0';

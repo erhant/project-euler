@@ -1,3 +1,8 @@
+/*
+topics:
+  - math
+difficulty: easy
+*/
 
 // Auxillary to get the number of digits
 int numDigits(int n) {

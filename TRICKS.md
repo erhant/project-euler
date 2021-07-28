@@ -1,5 +1,7 @@
 ## Tricks (from my own experience)
 
-- Treating the number as an index (1-based) and painting the visited indexes with negation, while iterating and taking the absolute values. (See [first-missing-positive](https://leetcode.com/problems/first-missing-positive/) and [find-all-duplicates-in-an-array](https://leetcode.com/problems/find-all-duplicates-in-an-array/))
+- **Negative Painting**: When all elements are positive, you can set them negative and use absolute value to hold information.
+- **Sliding Window**: Can sometimes be used to combine an inner-outer loop pair into a single one.
 
-- English alphabet has 26 letters.
+
+
