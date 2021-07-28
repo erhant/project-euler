@@ -2,7 +2,7 @@
 topics:
   - math
   - string
-  - hashmap
+  - hash table
 difficulty: easy
 */
 

@@ -1,6 +1,4 @@
 /*
-tricks:
-
 topics:
   - stack
   - string

@@ -1,3 +1,10 @@
+/*
+topics:
+  - greedy
+  - math
+difficulty: easy
+*/
+
 // Change the first 6 to a 9
 int maximum69Number(int num) {
   int div = 1000;

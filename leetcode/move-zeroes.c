@@ -1,3 +1,10 @@
+/*
+topics:
+  - array
+  - two pointers
+difficulty: easy
+*/
+
 void moveZeroes(int* nums, int numsSize) {
   int i = 0, offset = 0, zeros = 0;
   for (; i < numsSize; i++) {

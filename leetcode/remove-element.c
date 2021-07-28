@@ -1,3 +1,10 @@
+/*
+topics:
+  - array
+  - two pointers
+difficulty: easy
+*/
+
 int removeElement(int* nums, int numsSize, int val) {
   int i, offset = 0, vals = 0;
   for (i = 0; i < numsSize; i++) {

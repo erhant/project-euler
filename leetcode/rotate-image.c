@@ -1,4 +1,12 @@
 /*
+topics:
+  - array
+  - math
+  - matrix
+difficulty: medium
+*/
+
+/*
 right = matrixSize - 1 - i;
 left = i;
 up = i;

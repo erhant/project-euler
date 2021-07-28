@@ -1,3 +1,11 @@
+/*
+topics:
+  - string
+  - hash table
+  - queue
+  - counting
+difficulty: easy
+*/
 
 int firstUniqChar(char* s) {
   int COUNT[26] = {0}, i;

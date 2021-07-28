@@ -1,7 +1,14 @@
+/*
+topics:
+  - array
+  - hash table
+  - negative painting
+difficulty: easy
+*/
+
 class Solution {
  public:
   vector<int> findDuplicates(vector<int>& nums) {
-    // Paint negatives (as in first-missing-positive)
     vector<int> ans;
     int num;
     for (int i = 0; i < nums.size(); i++) {

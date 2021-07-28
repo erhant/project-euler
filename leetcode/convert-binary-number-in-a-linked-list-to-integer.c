@@ -1,3 +1,10 @@
+/*
+topics:
+  - linked list
+  - math
+difficulty: easy
+*/
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {

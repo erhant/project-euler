@@ -1,3 +1,12 @@
+/*
+topics:
+  - array
+  - hash table
+  - math
+  - counting
+difficulty: easy
+*/
+
 // Use Histogram
 class Solution {
  public:
@@ -11,7 +20,7 @@ class Solution {
   }
 };
 
-// Use HashMap
+// Use hash table
 class Solution2 {
  public:
   int numIdenticalPairs(vector<int>& nums) {

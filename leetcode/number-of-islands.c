@@ -1,3 +1,12 @@
+/*
+topics:
+  - array
+  - dfs
+  - bfs
+  - union find
+  - matrix
+difficulty: medium
+*/
 
 void removeLand(char** grid, int rows, int cols, int r, int c) {
   if (r >= rows || c >= cols || grid[r][c] == '0') return;

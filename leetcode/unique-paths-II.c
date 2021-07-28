@@ -1,3 +1,11 @@
+/*
+topics:
+  - array
+  - dynamic programming
+  - matrix
+difficulty: medium
+*/
+
 // 82.86% time, 100% mem, need to improve time.
 int uniquePathsWithObstacles(int** obstacleGrid, int obstacleGridSize, int* obstacleGridColSize) {
   int m = obstacleGridSize;

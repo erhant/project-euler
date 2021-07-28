@@ -1,3 +1,11 @@
+/*
+topics:
+  - array
+  - sorting
+  - two pointers
+difficulty: easy
+*/
+
 int* sortedSquares(int* nums, int n, int* returnSize) {
   int* ans = malloc(n * sizeof(int));
   *returnSize = n;

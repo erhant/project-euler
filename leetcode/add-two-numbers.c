@@ -2,7 +2,7 @@
 topics:
   - linked list
   - math
-  - hashmap
+  - hash table
 difficulty: medium
 */
 

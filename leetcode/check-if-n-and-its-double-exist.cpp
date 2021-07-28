@@ -1,3 +1,13 @@
+/*
+topics:
+  - array
+  - hash table
+  - two pointers
+  - binary search
+  - sorting
+difficulty: easy
+*/
+
 #define EXISTS(hash, key) (hash.find(key) != hash.end())
 
 class Solution {

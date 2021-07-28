@@ -1,3 +1,9 @@
+/*
+topics:
+  - array
+difficulty: easy
+*/
+
 int getdigits(n) {
   if ((n) >= 1 && (n) < 10) {
     return 0;

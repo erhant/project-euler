@@ -1,3 +1,11 @@
+/*
+topics:
+  - array
+  - math
+  - simulation
+difficulty: easy
+*/
+
 int oddCells(int n, int m, int** indices, int indicesSize, int* indicesColSize) {
   int* rows = (int*)calloc(n, sizeof(int));  // calloc sets memory to 0.
   int* cols = (int*)calloc(m, sizeof(int));  // calloc sets memory to 0.

@@ -1,3 +1,9 @@
+/*
+topics:
+  - array
+difficulty: easy
+*/
+
 class Solution {
  public:
   vector<int> shuffle(vector<int>& nums, int n) {

@@ -1,3 +1,9 @@
+/*
+topics:
+  - array
+difficulty: easy
+*/
+
 bool validMountainArray(int* arr, int n) {
   if (n < 3) return false;
   int i = 1;

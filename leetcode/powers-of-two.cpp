@@ -1,3 +1,11 @@
+/*
+topics:
+  - math
+  - bit manipulation
+  - recursion
+difficulty: easy
+*/
+
 class Solution {
  public:
   bool isPowerOfTwo(int n) {

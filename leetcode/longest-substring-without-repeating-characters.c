@@ -1,7 +1,7 @@
 /*
 topics:
   - string
-  - hashmap
+  - hash table
   - sliding window
 difficulty: medium
 */

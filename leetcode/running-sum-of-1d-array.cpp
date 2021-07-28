@@ -1,3 +1,10 @@
+/*
+topics:
+  - array
+  - prefix sum
+difficulty: easy
+*/
+
 class Solution {
  public:
   vector<int> runningSum(vector<int>& nums) {

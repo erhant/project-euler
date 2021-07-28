@@ -1,3 +1,10 @@
+/*
+topics:
+  - array
+  - two pointers
+difficulty: easy
+*/
+
 int removeDuplicates(int* nums, int numsSize) {
   int i, offset = 0, vals = 0;
   for (i = 1; i < numsSize; i++) {

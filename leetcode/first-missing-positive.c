@@ -1,3 +1,11 @@
+/*
+topics:
+  - array
+  - hash table
+  - negative painting
+difficulty: hard
+*/
+
 int firstMissingPositive(int* nums, int numsSize) {
   // 1 - Paint n> nums and non-positive as n+1
   for (int i = 0; i < numsSize; i++) {

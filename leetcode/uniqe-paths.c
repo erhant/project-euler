@@ -1,3 +1,11 @@
+/*
+topics:
+  - math
+  - dynamic programming
+  - combinatorics
+difficulty: medium
+*/
+
 #define A(r, c) (r) * (n) + (c)  // assumes n is defined
 
 int uniquePaths(int m, int n) {

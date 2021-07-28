@@ -1,3 +1,9 @@
+/*
+topics:
+  - array
+difficulty: easy
+*/
+
 int findMaxConsecutiveOnes(int* nums, int n) {
   int curOnes = 0;
   int maxOnes = 0;

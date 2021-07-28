@@ -1,3 +1,9 @@
+/*
+topics:
+  - string
+difficulty: easy
+*/
+
 char* longestCommonPrefix(char** strs, int strsSize) {
   unsigned char c, si, i;
   for (i = 0; strs[0][i] != '\0'; ++i) {
