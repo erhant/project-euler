@@ -21,3 +21,5 @@ valid-parentheses.cpp:
     - string
   difficulty: easy
 ```
+
+Each directory is also capable of creating their own `index.yaml`. The outer `index.yaml` is an aggregation of these. All `index.yaml` files are linted using `yamllint`.

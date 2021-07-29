@@ -9,7 +9,7 @@ ALL_FILES += $(TS_FILES)
 INDEX_FILE := index.yaml
 
 # sed -e '/^$/,$d' $$f  | head -n -1 | tail -n +2 | awk '{printf "\t%s\n", $0}' >> $(INDEX_FILE)
-# gets the first lines until blank, trims first and last lines, adds 2 spaces before, append to index
+# get lines until blank | trim last line | trim first line | add 2 spaces before each line >> append to index
 index: $(ALL_FILES)
 	@rm -f $(INDEX_FILE) 
 	@echo "---" >> $(INDEX_FILE) 
@@ -21,3 +21,4 @@ index: $(ALL_FILES)
 	@echo "$(INDEX_FILE) created!"
 	@yamllint $(INDEX_FILE)
 	
+.PHONY: index
