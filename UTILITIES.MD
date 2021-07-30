@@ -6,6 +6,14 @@
 
 - English alphabet has 26 letters.
 
+- When you need to alternate a variable, say `p` and `q`, you can do the following:
+```C
+int altvar[2] = {p, q};
+bool a = 0;
+int x = altvar[a]; // to access
+a = !a; // to switch variable
+```
+
 - To get the number of digits from an `int`:
 
 ```C
