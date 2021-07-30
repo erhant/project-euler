@@ -2,6 +2,7 @@
 topics:
   - array
   - hash table
+  - important
 difficulty: easy
 */
 

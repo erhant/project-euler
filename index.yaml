@@ -24,6 +24,12 @@ leetcode:
       - queue
       - counting
     difficulty: easy
+  reverse-linked-list.c:
+    topics:
+      - linked list
+      - recursion
+      - important
+    difficulty: easy
   reverse-integer.c:
     topics:
       - math
@@ -148,6 +154,7 @@ leetcode:
     topics:
       - array
       - hash table
+      - important
     difficulty: easy
   find-all-duplicates-in-an-array.cpp:
     topics:
@@ -184,6 +191,14 @@ leetcode:
       - bfs
       - dfs
       - matrix
+    difficulty: easy
+  invert-binary-tree.cpp:
+    topics:
+      - tree
+      - binary tree
+      - bfs
+      - dfs
+      - important
     difficulty: easy
   longest-substring-without-repeating-characters.ts:
     topics:

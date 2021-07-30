@@ -23,6 +23,12 @@ first-unique-character-in-a-string.c:
     - queue
     - counting
   difficulty: easy
+reverse-linked-list.c:
+  topics:
+    - linked list
+    - recursion
+    - important
+  difficulty: easy
 reverse-integer.c:
   topics:
     - math
@@ -147,6 +153,7 @@ two-sum.cpp:
   topics:
     - array
     - hash table
+    - important
   difficulty: easy
 find-all-duplicates-in-an-array.cpp:
   topics:
@@ -183,6 +190,14 @@ island-perimeter.cpp:
     - bfs
     - dfs
     - matrix
+  difficulty: easy
+invert-binary-tree.cpp:
+  topics:
+    - tree
+    - binary tree
+    - bfs
+    - dfs
+    - important
   difficulty: easy
 longest-substring-without-repeating-characters.ts:
   topics:
