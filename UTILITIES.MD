@@ -14,6 +14,14 @@ int x = altvar[a]; // to access
 a = !a; // to switch variable
 ```
 
+- Some utility macros:
+
+```C
+#define MIN(a, b) ((a) < (b)) ? (a) : (b)
+
+#define MAX(a, b) ((a) > (b)) ? (a) : (b)
+```
+
 - To get the number of digits from an `int`:
 
 ```C
