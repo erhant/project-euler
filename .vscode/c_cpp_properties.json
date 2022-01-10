@@ -7,8 +7,8 @@
         "${workspaceFolder}/leetcode/**"
       ],
       "defines": [],
-      "compilerPath": "/usr/bin/clang-10",
-      "intelliSenseMode": "linux-clang-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "intelliSenseMode": "linux-gcc-x64",
       "cStandard": "c17",
       "cppStandard": "c++20"
     }
