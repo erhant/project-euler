@@ -7,7 +7,7 @@ import Data.Char (digitToInt)
 findAdjProduct :: [Int] -> Int -> Int
 findAdjProduct digits d = _findAdjProduct digits d 0
 
--- | leftmost, leftStr, rightMost, rightStr,
+-- | digits, numDigits, product
 _findAdjProduct :: [Int] -> Int -> Int -> Int
 _findAdjProduct digits d p = do
   let cur_p = product (take d digits)
