@@ -4,7 +4,7 @@
 
 I decided to solve these using Haskell, because why not? Run each solution using `runhaskell <file>` command.
 
-See [Project Euler](https://projecteuler.net/) for list of problems. The list below also has the solved ones, with the title linking to the website, and number linking to the
+See [Project Euler](https://projecteuler.net/) for list of problems. The list below also has the solved ones, with the title linking to the website, and number linking to the solution file.
 
 | No.          | Problem Title                                                    | Notes             |
 | ------------ | ---------------------------------------------------------------- | ----------------- |
@@ -12,3 +12,4 @@ See [Project Euler](https://projecteuler.net/) for list of problems. The list be
 | [2](./P2.hs) | [Even Fibonacci numbers](https://projecteuler.net/problem=2)     |                   |
 | [3](./P3.hs) | [Largest prime factor](https://projecteuler.net/problem=3)       |                   |
 | [4](./P4.hs) | [Largest palindrome product](https://projecteuler.net/problem=4) | Need to optimize. |
+| [5](./P5.hs) | [Smallest multiple](https://projecteuler.net/problem=5)          |                   |
