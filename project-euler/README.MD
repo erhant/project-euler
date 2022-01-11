@@ -15,4 +15,4 @@ See [Project Euler](https://projecteuler.net/) for list of problems. The list be
 | [5](./P5.hs) | [Smallest multiple](https://projecteuler.net/problem=5)           |                   |
 | [6](./P6.hs) | [Sum square difference](https://projecteuler.net/problem=6)       |                   |
 | [7](./P7.hs) | [10001st prime](https://projecteuler.net/problem=7)               |                   |
-| [8](./P8.hs) | [Largest product in a series](https://projecteuler.net/problem=8) | in progress       |
+| [8](./P8.hs) | [Largest product in a series](https://projecteuler.net/problem=8) |                   |
