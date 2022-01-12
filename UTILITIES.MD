@@ -1,12 +1,13 @@
-- To check if a key exists in an `unordered_map`:
+To check if a key exists in an `unordered_map`:
 
 ```Cpp
 #define EXISTS(hash, key) (hash.find(key) != hash.end())
 ```
 
-- English alphabet has 26 letters.
+---
 
-- When you need to alternate a variable, say `p` and `q`, you can do the following:
+When you need to alternate a variable, say `p` and `q`, you can do the following:
+
 ```C
 int altvar[2] = {p, q};
 bool a = 0;
@@ -14,19 +15,13 @@ int x = altvar[a]; // to access
 a = !a; // to switch variable
 ```
 
-- Some utility macros:
+---
 
-```C
-#define MIN(a, b) ((a) < (b)) ? (a) : (b)
-
-#define MAX(a, b) ((a) > (b)) ? (a) : (b)
-```
-
-- To get the number of digits from an `int`:
+To get the number of digits from an `int`:
 
 ```C
 int numDigits(int n) {
-  if (n < 100000) 
+  if (n < 100000)
     if (n < 100)
       if (n < 10)
         return 1;
@@ -41,15 +36,15 @@ int numDigits(int n) {
         else
           return 5;
   else
-    if (n < 10000000) 
+    if (n < 10000000)
       if (n < 1000000)
         return 6;
       else
         return 7;
-    else 
+    else
       if (n < 100000000)
         return 8;
-      else 
+      else
         if (n < 1000000000)
           return 9;
         else
