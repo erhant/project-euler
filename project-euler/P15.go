@@ -38,3 +38,6 @@ func main() {
 	cols := 20
 	fmt.Printf("Answer:\nA %d x %d grid has %d paths.\n", rows, cols, latticePaths(rows, cols))
 }
+
+// NOTE: https://stemhash.com/counting-lattice-paths/
+// A better method is possible by using combinatorics.

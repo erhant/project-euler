@@ -22,7 +22,8 @@ See [Project Euler](https://projecteuler.net/) for list of problems. The list be
 | [9](./P09.hs)  | [Special Pythagorean triplet](https://projecteuler.net/problem=9)         | Can be optimized |
 | [10](./P10.hs) | [Summation of primes](https://projecteuler.net/problem=10)                | Can use Sieve    |
 | [11](./P11.go) | [Largest product in a grid](https://projecteuler.net/problem=11)          | Used Go          |
-| [12](./P12.go) | [Highly divisible triangular number](https://projecteuler.net/problem=12) |                  |
-| [13](./P13.go) | [Large sum](https://projecteuler.net/problem=13)                          |                  |
+| [12](./P12.hs) | [Highly divisible triangular number](https://projecteuler.net/problem=12) |                  |
+| [13](./P13.hs) | [Large sum](https://projecteuler.net/problem=13)                          |                  |
 | [14](./P14.go) | [Longest Collatz sequence](https://projecteuler.net/problem=14)           | Used Go          |
 | [15](./P15.go) | [Lattice paths](https://projecteuler.net/problem=15)                      | Used Go          |
+| [16](./P16.hs) | [Power digit sum](https://projecteuler.net/problem=16)                    | Can be optimized |
