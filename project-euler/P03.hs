@@ -3,12 +3,6 @@ module P3 where
 import Data.List (find)
 import Data.Maybe (fromJust, isNothing)
 
--- | Consumes twos in a number, so the end result is always an odd number
-consumeTwos :: Int -> Int
-consumeTwos n
-  | even n = consumeTwos (div n 2)
-  | otherwise = n
-
 -- find (\a -> (n `rem` a) == 0) primes
 
 -- | The factor tree here is not really a tree, but a line of nodes with one leaf each.
@@ -26,21 +20,15 @@ factorTree primes rightChild leftChild = case find (\a -> (rightChild `rem` a) =
           primes -- list of primes (TODO: can be updated on each recursion to reduce search space)
           (rightChild `div` lc) -- new right child
           lc -- new left child
-  Nothing -> rightChild
+  Nothing -> rightChild -- no factor, rightChild is a prime now
 
 -- Largest Prime Factor using the factor tree method
 lpf :: Int -> Int
-lpf n
-  | n < 2 = -1 -- edge case
-  | otherwise = do
-    let m = consumeTwos n -- first we get rid of twos
-    if m == 1
-      then 2 -- number was a power of 2
-      else
-        factorTree
-          (filter odd [3 .. (floor (sqrt (fromIntegral m)))]) -- list of primes
-          m -- right child: parent / smallest factor
-          2 -- left child: smallest factor (we can give 2 even if the input was odd, because lpf n = lpf 2*n for odds)
+lpf n =
+  factorTree
+    (2 : [3, 5 .. (floor (sqrt (fromIntegral n)))]) -- list of primes
+    n -- right child: parent / smallest factor
+    1 -- left child: smallest factor (1 for dummy)
 
 -------------------------------------main-------------------------------------
 main :: IO ()
