@@ -27,3 +27,4 @@ See [Project Euler](https://projecteuler.net/) for list of problems. The list be
 | [14](./P14.go) | [Longest Collatz sequence](https://projecteuler.net/problem=14)           | Used Go          |
 | [15](./P15.go) | [Lattice paths](https://projecteuler.net/problem=15)                      | Used Go          |
 | [16](./P16.hs) | [Power digit sum](https://projecteuler.net/problem=16)                    | Can be optimized |
+| [17](./P17.hs) | [Number letter counts](https://projecteuler.net/problem=17)               | Used Go          |
