@@ -34,3 +34,5 @@ Furthermore, there are tags as described below:
 | [18](./P18.go) | [Maximum path sum I](https://projecteuler.net/problem=18)                 | 🎈   |
 | [19](./P19.go) | [Counting Sundays](https://projecteuler.net/problem=19)                   |      |
 | [20](./P20.hs) | [Factorial digit sum](https://projecteuler.net/problem=20)                | 🛠️   |
+| SKIP           | [Amicable numbers](https://projecteuler.net/problem=21)                   |      |
+| [22](./P22.go) | [Names scores](https://projecteuler.net/problem=22)                       |      |
