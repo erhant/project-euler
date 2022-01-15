@@ -2,10 +2,8 @@
 
 ## Project Euler
 
-I decided to solve these using [Haskell](https://www.haskell.org/) as much as I can, because why not?
-
-- For Haskell codes, use `runhaskell <file>` command.
-- For Go codes, use `go run <file>` command.
+- <img src="https://cdn.jsdelivr.net/npm/programming-languages-logos/src/haskell/haskell.png" height="15">: Run with `runhaskell <file>`
+- <img src="https://cdn.jsdelivr.net/npm/programming-languages-logos/src/go-old/go-old.png" height="15">: Run with `go run <file>`
 
 See [Project Euler](https://projecteuler.net/) for list of problems. The list below also has the solved ones, with the title linking to the website, and number linking to the solution file.
 
@@ -21,10 +19,11 @@ See [Project Euler](https://projecteuler.net/) for list of problems. The list be
 | [8](./P08.hs)  | [Largest product in a series](https://projecteuler.net/problem=8)         |                  |
 | [9](./P09.hs)  | [Special Pythagorean triplet](https://projecteuler.net/problem=9)         | Can be optimized |
 | [10](./P10.hs) | [Summation of primes](https://projecteuler.net/problem=10)                | Can use Sieve    |
-| [11](./P11.go) | [Largest product in a grid](https://projecteuler.net/problem=11)          | Used Go          |
+| [11](./P11.go) | [Largest product in a grid](https://projecteuler.net/problem=11)          |                  |
 | [12](./P12.hs) | [Highly divisible triangular number](https://projecteuler.net/problem=12) |                  |
 | [13](./P13.hs) | [Large sum](https://projecteuler.net/problem=13)                          |                  |
-| [14](./P14.go) | [Longest Collatz sequence](https://projecteuler.net/problem=14)           | Used Go          |
-| [15](./P15.go) | [Lattice paths](https://projecteuler.net/problem=15)                      | Used Go          |
+| [14](./P14.go) | [Longest Collatz sequence](https://projecteuler.net/problem=14)           |                  |
+| [15](./P15.go) | [Lattice paths](https://projecteuler.net/problem=15)                      |                  |
 | [16](./P16.hs) | [Power digit sum](https://projecteuler.net/problem=16)                    | Can be optimized |
-| [17](./P17.hs) | [Number letter counts](https://projecteuler.net/problem=17)               | Used Go          |
+| [17](./P17.go) | [Number letter counts](https://projecteuler.net/problem=17)               |                  |
+| [18](./P18.go) | [Maximum path sum I](https://projecteuler.net/problem=18)                 |                  |

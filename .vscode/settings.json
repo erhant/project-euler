@@ -1,5 +1,5 @@
 {
-  "explorer.sortOrder": "type",
+  "explorer.sortOrder": "default",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs":"active" 
 }
