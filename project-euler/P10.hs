@@ -1,5 +1,7 @@
 module P10 where
 
+-- | TODO: Use a better sieve for primes.
+
 -- | Infinite list of primes up to N
 primes :: [Int]
 primes = 2 : 3 : filter isPrime [5, 7 ..]

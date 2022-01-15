@@ -115,7 +115,6 @@ main = do
 -------------------------------------note-------------------------------------
 
 {-
-We can just module these into the requested digits, and then do the summation since the rest will not matter for us.
-However, Haskell boi here does not have a problem with beyond-limit integers.
+Haskell boi here has no problem with the int limit, but for the actual summation we could do a string-char based summation.
 
 -}
