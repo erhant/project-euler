@@ -1,3 +1,4 @@
+// usr/bin/gcc "$0" && exec ./a.out "$@"
 #include <stdio.h>
 
 int X, Y;
