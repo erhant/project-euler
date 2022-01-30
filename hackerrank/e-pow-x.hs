@@ -1,6 +1,6 @@
 f :: Double -> Double
 f x =
-  1.0 + (_f x x 1.0 2.0)
+  1.0 + _f x x 1.0 2.0
   where
     _f :: Double -> Double -> Double -> Double -> Double
     _f x num denom 10.0 = num / denom
