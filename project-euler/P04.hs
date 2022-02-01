@@ -5,30 +5,25 @@ module P4 where
 -- | Largest Palindrome Product, the parameter is the number of digits of the factors
 lpp :: Int -> Int
 lpp 1 = 9 -- 1 x 9 = 9, no other palindrome product of two digits
-lpp d = _lpp d ((10 ^ d) - 1) ((10 ^ d) - 1) 0
-
--- TODO: Use higher-order function to avoid recomputing digits and stuff
-
--- | Returns the factors of the largest palindrome product (in case we want to see them)
-_lpp :: Int -> Int -> Int -> Int -> Int
-_lpp d a b max = do
-  let p = a * b -- product
-  if p < 10 ^ ((2 * d) - 1) -- if the product has less than 2*d digits, reset a but decrement b
-    then
-      if p < 1
-        then max -- finish recursion
+lpp d = _lpp ((10 ^ d) - 1) ((10 ^ d) - 1) 0
+  where
+    _lpp :: Int -> Int -> Int -> Int
+    _lpp a b max = do
+      let p = a * b -- product
+      if p < 10 ^ ((2 * d) - 1) -- if the product has less than 2*d digits, reset a but decrement b
+        then
+          if p < 1
+            then max -- finish recursion
+            else
+              _lpp
+                ((10 ^ d) - 1) -- reset a
+                (b - 1) -- decrement b
+                max -- store passed max
         else
           _lpp
-            d
-            ((10 ^ d) - 1) -- reset a
-            (b - 1) -- decrement b
-            max -- store passed max
-    else
-      _lpp
-        d
-        (a - 1) -- decrement a
-        b -- b stays constant
-        (if isPalindrome (2 * d) p && (p > max) then p else max) -- store passed max
+            (a - 1) -- decrement a
+            b -- b stays constant
+            (if isPalindrome (2 * d) p && (p > max) then p else max) -- store passed max
 
 -- | Returns True if the given number p (with d digits) is a palindrome.
 isPalindrome :: Int -> Int -> Bool

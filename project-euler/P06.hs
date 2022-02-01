@@ -3,11 +3,11 @@ module P6 where
 -- | Finds (square of sums) - (sum of squares)
 sqdiffNaive :: Int -> Int
 sqdiffNaive n = 2 * _sqdiffNaive [1 .. n]
-
-_sqdiffNaive :: [Int] -> Int
-_sqdiffNaive [] = 0
-_sqdiffNaive [n] = 0
-_sqdiffNaive (n : ns) = sum (map (* n) ns) + _sqdiffNaive ns
+  where
+    _sqdiffNaive :: [Int] -> Int
+    _sqdiffNaive [] = 0
+    _sqdiffNaive [n] = 0
+    _sqdiffNaive (n : ns) = sum (map (* n) ns) + _sqdiffNaive ns
 
 -- | Finds (square of sums) - (sum of squares) in a better way
 sqdiffBetter :: Int -> Int

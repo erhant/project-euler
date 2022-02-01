@@ -17,7 +17,7 @@ Furthermore, there are tags as described below:
 | [1](./P01.hs)  | [Multiples of 3 or 5](https://projecteuler.net/problem=1)                 |      |
 | [2](./P02.hs)  | [Even Fibonacci numbers](https://projecteuler.net/problem=2)              |      |
 | [3](./P03.hs)  | [Largest prime factor](https://projecteuler.net/problem=3)                | 🎈   |
-| [4](./P04.hs)  | [Largest palindrome product](https://projecteuler.net/problem=4)          | 🛠️   |
+| [4](./P04.hs)  | [Largest palindrome product](https://projecteuler.net/problem=4)          |      |
 | [5](./P05.hs)  | [Smallest multiple](https://projecteuler.net/problem=5)                   |      |
 | [6](./P06.hs)  | [Sum square difference](https://projecteuler.net/problem=6)               |      |
 | [7](./P07.hs)  | [10001st prime](https://projecteuler.net/problem=7)                       |      |

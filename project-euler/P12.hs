@@ -14,16 +14,16 @@ getPrimeFactors n =
   _getPrimeFactors
     (2 : [3, 5 .. (floor (sqrt (fromIntegral n)))]) -- list of primes
     n
-
-_getPrimeFactors :: [Int] -> Int -> [Int]
-_getPrimeFactors primes 1 = []
-_getPrimeFactors primes n = case find (\a -> (n `rem` a) == 0) primes of
-  Just factor ->
-    factor :
-    _getPrimeFactors
-      primes
-      (n `div` factor)
-  Nothing -> [n]
+  where
+    _getPrimeFactors :: [Int] -> Int -> [Int]
+    _getPrimeFactors primes 1 = []
+    _getPrimeFactors primes n = case find (\a -> (n `rem` a) == 0) primes of
+      Just factor ->
+        factor :
+        _getPrimeFactors
+          primes
+          (n `div` factor)
+      Nothing -> [n]
 
 numFactorsOfNthTriangleNumber :: Int -> Int
 numFactorsOfNthTriangleNumber n = foldr (\x y -> y * (snd x + 1)) 1 (frequency (getPrimeFactors (div (n * (n + 1)) 2)))
