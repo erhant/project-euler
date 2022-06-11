@@ -11,4 +11,4 @@ The contract creation code is composed of contract ABI encoded and the parameter
 
 ## Reading Storage
 
-Looking at the Vault contract, the storage is read from top to bottom. At the top, we have `bool public locked;` and after that we have `bytes32 private password;`. These variable are at index 0 and 1 in the storage respectively. We can therefore read the password by `await web3.eth.getStorageAt(contract.address, 1)` and simply give the result as the parameter to `contract.unlock(...)`.
+Looking at the Vault contract, the storage is read from top to bottom. EVM has $2^{256}$ slots with 32-bytes each. At the top, we have `bool public locked;` and after that we have `bytes32 private password;`. These variable are at index 0 and 1 in the storage respectively. We can therefore read the password by `await web3.eth.getStorageAt(contract.address, 1)` and simply give the result as the parameter to `contract.unlock(...)`.
