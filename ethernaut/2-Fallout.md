@@ -1,3 +1,5 @@
 # Fallout
 
-This is very simple, you will notice that the contract name is Fallout but the supposed constructor is Fal1out. That typo is literally it. Just call the Fal1out function to be the owner.
+Prior to the `constructor` function, the constructor was used as the function that has the same name as the contract. However, if by any chance the supposed constructor function has a different name, you are open to attacks! In this case, the name is `Fallout` but the function is written as `Fal1out`.
+
+This actually happened to [Rubixi](https://github.com/crytic/not-so-smart-contracts/tree/master/wrong_constructor_name).
