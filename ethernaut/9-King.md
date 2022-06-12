@@ -1,4 +1,4 @@
-# King
+# [King](https://ethernaut.openzeppelin.com/level/0x43BA674B4fbb8B157b7441C2187bCdD2cdF84FD5)
 
 The ponzi starts with 0.001 ether. We can exploit the game by giving an equal/larger ether, but via a contract that disallows receiving ether. This way, if someone is eligible to be the new king, the transaction will fail when it tries to send us the prize!
 
