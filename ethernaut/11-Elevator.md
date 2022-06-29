@@ -26,3 +26,5 @@ contract Building {
 ```
 
 The problem here is that Elevator did not specify `isLastFloor` to be a `view` function, which would prevent us from modifying the state like this.
+
+Another attack approach would be to return different results depending on the input data _without_ modifying state, such as via `gasLeft()`.
