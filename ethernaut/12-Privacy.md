@@ -1,4 +1,4 @@
-# [Privacy](https://ethernaut.openzeppelin.com/level/0x11343d543778213221516D004ED82C45C3c8788B)
+# [12. Privacy](https://ethernaut.openzeppelin.com/level/0x11343d543778213221516D004ED82C45C3c8788B)
 
 This is similar to the 8th level [Vault](./8-Vault.md), where we read the EVM storage. Here in addition to that, we learn about a [small optimization of EVM](https://docs.soliditylang.org/en/v0.8.13/internals/layout_in_storage.html) and [how casting works](https://www.tutorialspoint.com/solidity/solidity_conversions.htm).
 

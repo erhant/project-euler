@@ -1,4 +1,4 @@
-# [Fallback](https://ethernaut.openzeppelin.com/level/0x9CB391dbcD447E645D6Cb55dE6ca23164130D008)
+# [1. Fallback](https://ethernaut.openzeppelin.com/level/0x9CB391dbcD447E645D6Cb55dE6ca23164130D008)
 
 The receive function is flawed, we just need to send some value via contribute and then via receive to change the owner. The contribute requires less than 0.001 ether to function, and receive expects at least 0, so:
 

@@ -1,4 +1,4 @@
-# [Delegation](https://ethernaut.openzeppelin.com/level/0x9451961b7Aea1Df57bc20CC68D72f662241b5493)
+# [6. Delegation](https://ethernaut.openzeppelin.com/level/0x9451961b7Aea1Df57bc20CC68D72f662241b5493)
 
 The `delegatecall` is an important function. Normally, contracts call functions by making [message calls](https://docs.soliditylang.org/en/v0.4.21/introduction-to-smart-contracts.html#message-calls). `delegatecall` is a more specialized call, see more about it: [docs](https://docs.soliditylang.org/en/v0.4.21/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries) and also [this article](https://eip2535diamonds.substack.com/p/understanding-delegatecall-and-how?s=r).
 

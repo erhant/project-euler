@@ -1,4 +1,4 @@
-# [Re-entrancy](https://ethernaut.openzeppelin.com/level/0xe6BA07257a9321e755184FB2F995e0600E78c16D)
+# [10. Re-entrancy](https://ethernaut.openzeppelin.com/level/0xe6BA07257a9321e755184FB2F995e0600E78c16D)
 
 There is a pattern called [Checks - Effects - Interactions](https://fravoll.github.io/solidity-patterns/checks_effects_interactions.html) in Solidity. Basically:
     1. you **check** whether you can do something, such as checking balance
