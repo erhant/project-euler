@@ -2,9 +2,9 @@
 
 Wow this was challenging! We must pass 3 obstacles (gates) that are implemented as modifiers:
 
-1. Simple `msg.sender != tx.origin`
-2. A cute `gasLeft().mod(8191) == 0`
-3. A series of `require`'s tells us what the gate key must be like.
+1. Simple `msg.sender != tx.origin`.
+2. A cute `gasLeft().mod(8191) == 0`.
+3. A series of `require`'s telling us what the gate key must look like.
 
 ## Gate 1
 

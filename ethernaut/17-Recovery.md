@@ -1,4 +1,4 @@
-# [17-Recovery](https://ethernaut.openzeppelin.com/level/0x0EB8e4771ABA41B70d0cb6770e04086E5aee5aB2)
+# [17. Recovery](https://ethernaut.openzeppelin.com/level/0x0EB8e4771ABA41B70d0cb6770e04086E5aee5aB2)
 
 My initial solution was to check the internal transactions of the contract creation transaction of my level instance. There, we can very well see the "lost" contract address, and we will call the `destroy` function there. To call a function with arguments, you need to provide a `calldata` (see [here](https://docs.soliditylang.org/en/latest/abi-spec.html#examples)). The arguments are given in chunks of 32-bytes, but the first 4 bytes of the `calldata` indicate the function to be called. That is calculated by the first 4 bytes of the function's canonical form. There are several ways to find it:
 
@@ -71,4 +71,4 @@ web3.utils.soliditySha3(
 )
 ```
 
-The last 20 bytes of the resulting digest will be the contract address! Calling the `destroy` function is same as above.
+What is different with `soliditySha3` rather than `sha3` is that this one will encode-packed the parameters like Solidity would; hashing afterwards. The last 20 bytes of the resulting digest will be the contract address! Calling the `destroy` function is same as above.

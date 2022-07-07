@@ -59,8 +59,6 @@ contract Attacker {
 }
 ```
 
-We will donate some money to create our initial balance at the target, which will allow the `balances[msg.sender] >= _amount` to be true. Now, we can repeadetly withdraw that amount by re-entering the withdraw function. Since balance update effect happens after the transfer interaction, we will go on and on until the balance is depleted.
-
-_Note:_ As a defence, you could use a Pull-Payment approach: the user to be paid must come and withdraw their money themselves, rather than us paying to them.
+We will donate some money to create our initial balance at the target, which will allow the `balances[msg.sender] >= _amount` to be true. Now, we can repeadetly withdraw that amount by re-entering the withdraw function. Since balance update effect happens after the transfer interaction, we will go on and on until the balance is depleted.As a defense, you could use a pull-payment approach: the user to be paid must come and withdraw their money themselves, rather than us paying to them.
 
 _Note: This is how "The DAO" hack was executed, which resulted in the creation of Ethereum Classic._

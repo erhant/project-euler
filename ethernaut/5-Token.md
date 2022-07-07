@@ -30,7 +30,7 @@ The steps are simple:
     - Attacker has 4 tokens
 2. We can now send from Attacker to the Player a HUGE amount of tokens, I sent 67108842. It is important to note that this value is a bit smaller than the upper-limit to avoid overflowing back.
     - Player has 67108858 tokens. This is equal to (16 + 67108842).
-    - Attacker has 26 tokens. This is equal to (26 - 67108842) underflowed.
+    - Attacker has 26 tokens. This is equal to (4 - 67108842) underflowed.
 
 Why did we need the buddy attacker? Because in the code you can see that the two lines:
 

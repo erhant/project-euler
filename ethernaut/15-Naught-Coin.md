@@ -1,8 +1,6 @@
 # [15. Naught Coin](https://ethernaut.openzeppelin.com/level/0x096bb5e93a204BfD701502EB6EF266a950217218)
 
-Here we have a simple ERC-20 contract in our hands, that prevents us to `transfer` money to someone. However, this does not prevent us to `approve` that someone, and let them call `transferFrom` to take our money. That is precisely what we are going to do.
-
-We create and deploy a simple contract:
+Here we have a simple ERC-20 contract in our hands, that prevents us to `transfer` money to someone. However, this does not prevent us to `approve` that someone, and let them call `transferFrom` to take our money. That is precisely what we are going to do. We create and deploy a simple contract:
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
