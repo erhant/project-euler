@@ -18,7 +18,7 @@ and deploy it, I see that there are waaay more than 10 opcodes when I call the f
 
 I remembered the days I was taking an Assembly x8086 class back in my bachelor's, where we had to bring a bunch of papers stabled together, with all x8086 instructions on it! Our documentation here for opcodes will be <https://www.ethervm.io/>. You can also check <https://www.evm.codes/>.
 
-1. I CTRL+F to search "return", and first check the [`RETURN`](https://www.ethervm.io/#F3) opcode: `RETURN <offset> <length>`. Apparently, it returns `length` bytes from the `offset` in memory. So we need to store our `0x42` in **memory** first.
+1. I CTRL+F to search "return", and first check the [`RETURN`](https://www.ethervm.io/#F3) opcode: `RETURN <offset> <length>`. Apparently, it returns `length` bytes from the `offset` in memory. So we need to store our 42 in **memory** first.
 2. I CTRL+F "memory" to find the [related section](https://www.ethervm.io/#memory), and there we have 3 instructions. I find [`MSTORE`](https://www.ethervm.io/#52) to be good for our use-case. `MSTORE <offset> <value>`. Now we need to provide the actual data that these instructions read from the **stack**. _Note: using `MSTORE8` did not work._
 3. I CTRL+F "stack" to find the [related section](https://www.ethervm.io/#stack) and there we find [`PUSH1`](https://www.ethervm.io/#60) to be useful for us. How to provide argument to this guy? Here is the answer:
 
