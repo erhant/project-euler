@@ -76,4 +76,4 @@ await web3.eth.sendTransaction({
 })
 ```
 
-The returned object in console will have a `contractAddress` if everything goes well. You can confirm that the bytecode is correct by checking it on <https://rinkeby.etherscan.io/>, and look at the opcodes by clicking "Switch To Opcodes View" button. Afterwards, just set the solver and submit!
+The returned object in console will have a `contractAddress` if everything goes well. You can confirm that the bytecode is correct by checking it on <https://rinkeby.etherscan.io/>, and look at the opcodes by clicking "Switch To Opcodes View" button under the "Contract" tab. Afterwards, just set the solver to this contract address and submit!
