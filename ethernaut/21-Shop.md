@@ -2,7 +2,7 @@
 
 We had a similar puzzle back in the Elevator level: we need a function to return different things in a single transaction. The most barebones solution would be to check `gasLeft()` and return different results based on it, but here we have a cleaner solution.
 
-```
+```solidity
 function buy() public {
   Buyer _buyer = Buyer(msg.sender);
 
