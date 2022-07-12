@@ -32,11 +32,9 @@ The steps are simple:
     - Player has 67108858 tokens. This is equal to (16 + 67108842).
     - Attacker has 26 tokens. This is equal to (4 - 67108842) underflowed.
 
-Why did we need the buddy attacker? Because in the code you can see that the two lines:
+Why did we need the buddy attacker? In the code, you can see that the following two lines cancel eachother out if both `msg.sender` and `_to` are the same:
 
 ```solidity
 balances[msg.sender] -= _value;
 balances[_to] += _value;
 ```
-
-cancel eachother out if both `msg.sender` and `_to` are the same.

@@ -9,16 +9,16 @@ pragma solidity ^0.8.0;
 contract OneWayForward {  
 
   receive () external payable {
-  revert("Im the king!");
+    revert("Im the king!");
   }
 
   fallback () external payable {
-  revert("Im the king!");
+    revert("Im the king!");
   }
   
   function forward(address payable _to) public payable {
-  (bool sent, ) = _to.call{value: msg.value}("");
-  require(sent, "forwarded call failed");
+    (bool sent, ) = _to.call{value: msg.value}("");
+    require(sent, "forwarded call failed");
   }
 
 }
@@ -26,4 +26,4 @@ contract OneWayForward {
 
 The contract is simple: a forward function forwards our sent money to some address. The recieving address will know the contract as `msg.sender`, however they won't be able to send money back. Preventing to recieving money can be done by **not** implementing `receive` and `fallback` functions. In my case, I wanted to be a little bit cheeky and I implement them but inside revert with "Im the king!" message when they send me money ;)
 
-**A note on Call vs. Transfer**: We used `_to.call{value: msg.value}("")` instead of `_to.transfer(msg.value)`. This is because `transfer` sends 2300 gas to the receiver, but that gas is enough for the code to run on their side; so we must forward all our gas to them with `call`.
+**A note on Call vs. Transfer**: We used `_to.call{value: msg.value}("")` instead of `_to.transfer(msg.value)`. This is because `transfer` sends 2300 gas to the receiver, but that gas may not always be enough for the code to run on their side; so we must forward all our gas to them with `call`.

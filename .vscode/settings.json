@@ -4,9 +4,5 @@
   "editor.guides.bracketPairs": "active",
   "files.associations": {
     "*.tpp": "cpp",
-    "*.cutpp": "cuda",
-    "vector": "cpp",
-    "iosfwd": "cpp",
-    "iterator": "cpp"
   }
 }

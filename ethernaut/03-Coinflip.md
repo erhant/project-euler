@@ -33,3 +33,5 @@ contract Attacker {
   }
 }
 ```
+
+We can simply copy & paste their contract and find the flip result on our side beforehand.
