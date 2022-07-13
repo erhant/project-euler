@@ -4,7 +4,7 @@ We have another proxy-based puzzle here. This time, we see that [EIP-1967](https
 
 When we examine the Motorbike contract, we realize that it is just a proxy with its logic being the Engine contract. Engine contract is [Initializable](https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable#initializers). There is a question mark here though: the `initializer` is called from the proxy, so the affected storage is that of the Motorbike, not the Engine! Consequently, Motorbike should have the results of initialization in it's storage, while Engine should not.
 
-The `Initializable` has 2 storage variables, both 1-byte booleans. The Engine contract has two variables, a 20-byte address and a 32-byte unsigned integer. As per the EVM optimization, 2 booleans and 1 address will all occupy the same slot. So we should see an address and two boolean values side by side at the 0th position.
+The `Initializable` contract has 2 storage variables, both 1-byte booleans. The Engine contract has two variables, a 20-byte address and a 32-byte unsigned integer. As per the EVM optimization, 2 booleans and 1 address will all occupy the same slot. So we should see an address and two boolean values side by side at the 0th position.
 
 ```js
 // Proxy storage

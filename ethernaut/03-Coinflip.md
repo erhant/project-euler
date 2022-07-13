@@ -2,7 +2,7 @@
 
 In this attack, we will guess the supposed "random" flips by calling the attack from our contracts. The target contract is programmed to flip a coin on each block, so each guess we make must be on different blocks.
 
-Here is our attacking contract:
+We can simply copy and paste their `flip` function in our contract, and then call their actual `flip` function based on the result. Here is our attacking contract with a `psychicFlip` function that always guesses correctly:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -34,4 +34,4 @@ contract Attacker {
 }
 ```
 
-We can simply copy & paste their contract and find the flip result on our side beforehand.
+That is pretty much it!
