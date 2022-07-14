@@ -12,4 +12,4 @@ contract BadPartner {
 }
 ```
 
-We then set the withdrawal partner as this contract address, and we are done. Note that `call` can use at most 63/64 of the remaining gas. If 1/64 of the gas is enough to finish the rest of the stuff, you are good. To be safe though, just specify the amount of gas to forward.
+We then set the withdrawal partner as this contract address, and we are done. Note that `call` can use at most 63/64 of the remaining gas (see [EIP-150](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-150.md)). If 1/64 of the gas is enough to finish the rest of the stuff, you are good. To be safe though, just specify the amount of gas to forward.

@@ -56,10 +56,10 @@ Our initialization code is thus:
 PUSH1 0x0a // 10 bytes
 PUSH1 ;;;; // position in bytecode, we dont know yet
 PUSH1 0x00 // write to memory position 0
-CODECOPY   // copy the bytecode 
+CODECOPY   // copies the bytecode 
 PUSH1 0x0a // 10 bytes
-PUSH1 0x00 // memory position 0
-RETURN     // return the code copied above
+PUSH1 0x00 // read from memory position 0
+RETURN     // returns the code copied above
 ```
 
 Writing this in bytecode gives us `60 0a 60 ;; 60 00 39 60 0a 60 00 F3` which is 12 bytes. So that dummy `;;;;` has to be 12, i.e. `0x0C`.
