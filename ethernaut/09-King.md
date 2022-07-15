@@ -1,5 +1,34 @@
 # [9. King](https://ethernaut.openzeppelin.com/level/0x43BA674B4fbb8B157b7441C2187bCdD2cdF84FD5)
 
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract King {
+
+  address payable king;
+  uint public prize;
+  address payable public owner;
+
+  constructor() public payable {
+    owner = msg.sender;  
+    king = msg.sender;
+    prize = msg.value;
+  }
+
+  receive() external payable {
+    require(msg.value >= prize || msg.sender == owner);
+    king.transfer(msg.value);
+    king = msg.sender;
+    prize = msg.value;
+  }
+
+  function _king() public view returns (address payable) {
+    return king;
+  }
+}
+```
+
 The ponzi starts with 0.001 ether. We can exploit the game by giving an greater or equal ether, but via a contract that disallows receiving ether. This way, if someone is eligible to be the new king, the transaction will fail when it tries to send us the prize!
 
 ```solidity

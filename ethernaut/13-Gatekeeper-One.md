@@ -1,4 +1,38 @@
-# [13. Gatekeeper I](https://ethernaut.openzeppelin.com/level/0x9b261b23cE149422DE75907C6ac0C30cEc4e652A)
+# [13. Gatekeeper One](https://ethernaut.openzeppelin.com/level/0x9b261b23cE149422DE75907C6ac0C30cEc4e652A)
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import '@openzeppelin/contracts/math/SafeMath.sol';
+
+contract GatekeeperOne {
+  using SafeMath for uint256;
+  address public entrant;
+
+  modifier gateOne() {
+    require(msg.sender != tx.origin);
+    _;
+  }
+
+  modifier gateTwo() {
+    require(gasleft().mod(8191) == 0);
+    _;
+  }
+
+  modifier gateThree(bytes8 _gateKey) {
+    require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)), "GatekeeperOne: invalid gateThree part one");
+    require(uint32(uint64(_gateKey)) != uint64(_gateKey), "GatekeeperOne: invalid gateThree part two");
+    require(uint32(uint64(_gateKey)) == uint16(tx.origin), "GatekeeperOne: invalid gateThree part three");
+    _;
+  }
+
+  function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
+    entrant = tx.origin;
+    return true;
+  }
+}
+```
 
 Wow this was challenging! We must pass 3 obstacles (gates) that are implemented as modifiers:
 
@@ -26,7 +60,7 @@ Here we need to adjust the gas used in the transaction. We can do this by specif
 
 2. Unless you are extremely lucky, the transaction will be rejected by this gate. That is ok, because we want to debug it!
 
-3. Debug the transaction in Remix to get to the [`GAS`](https://github.com/crytic/evm-opcodes) opcode, which is what `gasleft()` is doing. There, we will look at the `remaining gas` field in "Step Details". You can easily get there in several ways:
+3. Debug the transaction in Remix to get to the [`GAS`](https://github.com/crytic/evm-opcodes) opcode, which is what `gasleft()` is doing in the background. There, we will look at the `remaining gas` field in "Step Details". You can easily get there in several ways:
 
     - Clicking "Click _here_ to jump where the call reverted." and then going backward a bit until you find the opcode.
     - Putting a breakpoint to the line with `gasleft()` and clicking right arrow at the debugger, which will go very close to that opcode.

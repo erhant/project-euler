@@ -1,5 +1,28 @@
 # [21. Shop](https://ethernaut.openzeppelin.com/level/0x3aCd4766f1769940cA010a907b3C8dEbCe0bd4aB)
 
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+interface Buyer {
+  function price() external view returns (uint);
+}
+
+contract Shop {
+  uint public price = 100;
+  bool public isSold;
+
+  function buy() public {
+    Buyer _buyer = Buyer(msg.sender);
+
+    if (_buyer.price() >= price && !isSold) {
+      isSold = true;
+      price = _buyer.price();
+    }
+  }
+}
+```
+
 We had a similar puzzle back in the Elevator level: we need a function to return different things in a single transaction. The most barebones solution would be to check `gasLeft()` and return different results based on it, but here we have a cleaner solution.
 
 ```solidity

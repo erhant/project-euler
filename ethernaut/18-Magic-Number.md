@@ -1,8 +1,34 @@
 # [18. Magic Number](https://ethernaut.openzeppelin.com/level/0x200d3d9Ac7bFd556057224e7aEB4161fED5608D0)
 
-In this level, we have to write a contract that returns 42 in as little as 10 opcodes.
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
 
-When I write the following contract:
+contract MagicNum {
+
+  address public solver;
+
+  constructor() public {}
+
+  function setSolver(address _solver) public {
+    solver = _solver;
+  }
+
+  /*
+    ____________/\\\_______/\\\\\\\\\_____        
+     __________/\\\\\_____/\\\///////\\\___       
+      ________/\\\/\\\____\///______\//\\\__      
+       ______/\\\/\/\\\______________/\\\/___     
+        ____/\\\/__\/\\\___________/\\\//_____    
+         __/\\\\\\\\\\\\\\\\_____/\\\//________   
+          _\///////////\\\//____/\\\/___________  
+           ___________\/\\\_____/\\\\\\\\\\\\\\\_ 
+            ___________\///_____\///////////////__
+  */
+}
+```
+
+In this level, we have to write a contract that returns 42 in as little as 10 opcodes. When I write the following contract:
 
 ```solidity
 contract Solver { 
@@ -12,7 +38,7 @@ contract Solver {
 }
 ```
 
-and deploy it, I see that there are waaay more than 10 opcodes when I call the function and check the opcodes in the Remix IDE debugger. So, we need to somehow write our own assembly there. To do this, we will become the compiler and do barebones contract creation: a transaction to address `0x0` with some data that is our contract! Contracts are made of two parts: initialization and runtime. Let us do the runtime first, since we know what to do there: return 42 somehow!
+and deploy it, I see that there are _waaay_ more than 10 opcodes when I call the function and check the opcodes in the Remix IDE debugger. So, we need to somehow write our own assembly there. To do this, we will **become** the compiler and do barebones contract creation: a transaction to address `0x0` with some data that makes our contract! Contract creation codes are made of two parts: initialization code and runtime code. Let us do the runtime first, since we know what to do there: return 42 somehow!
 
 ## Runtime Code
 

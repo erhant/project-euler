@@ -1,5 +1,39 @@
 # [19. Alien Codex](https://ethernaut.openzeppelin.com/level/0xda5b3Fb76C78b6EdEE6BE8F11a1c31EcfB02b272)
 
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.5.0;
+
+import '../helpers/Ownable-05.sol';
+
+contract AlienCodex is Ownable {
+
+  bool public contact;
+  bytes32[] public codex;
+
+  modifier contacted() {
+    assert(contact);
+    _;
+  }
+  
+  function make_contact() public {
+    contact = true;
+  }
+
+  function record(bytes32 _content) contacted public {
+  	codex.push(_content);
+  }
+
+  function retract() contacted public {
+    codex.length--;
+  }
+
+  function revise(uint i, bytes32 _content) contacted public {
+    codex[i] = _content;
+  }
+}
+```
+
 The problem is hinting us to somehow use the `codex` array to change the owner of the contract. The tool in doing so probably has something to do with the `length` of array. In fact, the `retract` is suspiciously dangerous, and actually might _underflow_ the array length!. The array length is an `uint256`, and once it is underflowed you basically "have" the entire contract storage (all $2^{256} - 1$ slots) as a part of your array. Consequently, you can index everything in the memory with that array!
 
 - After `make_contact`, we see that `await web3.eth.getStorageAt(contract.address, 0)` returns `0x000000000000000000000001da5b3fb76c78b6edee6be8f11a1c31ecfb02b272`. Remember that smaller than 32-bytes variables are bundled together if they are conseuctive, so this is actually `owner` and `contact` variable side by side! The `01` at the end of leftmost `0x00..01` stands for the boolean value.
