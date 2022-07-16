@@ -34,9 +34,18 @@ contract Delegation {
 }
 ```
 
-The `delegatecall` is an important function. Normally, contracts call functions by making [message calls](https://docs.soliditylang.org/en/v0.4.21/introduction-to-smart-contracts.html#message-calls). `delegatecall` is a more specialized call, see more about it: [docs](https://docs.soliditylang.org/en/v0.4.21/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries) and also [this article](https://eip2535diamonds.substack.com/p/understanding-delegatecall-and-how?s=r).
+The `delegatecall` is an important function. Normally, contracts call functions by making [message calls](https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#message-calls). [`delegatecall`](https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries) is a more specialized call, basically forwarding a contract's context to some other contract and let it do whatever it wants with it. This is useful to implement libraries that might work on your storage variables, or have upgradable contracts where a proxy makes delegate calls to various different contracts over time.
 
-The attack in this example is just one line:
+During a `delegatecall`, the following do not change:
+
+- `msg.sender`
+- `msg.value`
+- `address(this)`
+- The storage layout (we will exploit this in this challenge)
+
+I would like refer to this article that explains how delegate calls work really well: <https://eip2535diamonds.substack.com/p/understanding-delegatecall-and-how?s=r>.
+
+The attack in this example is just one transaction:
 
 ```js
 await sendTransaction({
@@ -51,3 +60,5 @@ Now let us look at the `data` part: EVM calls functions by looking at the **firs
 When we call Delegation contract with this, it will go to fallback function. There, a delegatecall is made with `msg.data` as the parameter, so it will call `pwn` function of Delegate.
 
 The actual exploit has to do with storage. Notice that both contracts have `address public owner` at their first slot in storage. When you use `delegatecall`, the caller's storage is active and the callee can update it, with respect to the slots. As we see, `pwn` updates `owner` and this in effect updates the caller's storage value at the same slot, which is again the owner address.
+
+The storage variable assignment within `pwn` therefore effects the contract which made `delegatecall`, and we become the owner.

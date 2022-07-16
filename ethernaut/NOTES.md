@@ -6,6 +6,14 @@ General resources that may be helpful.
 
 I used <https://eth-converter.com/>; and I also wrote one at my [homepage](https://www.erhant.me/tools/ethertools).
 
+## Function Selector
+
+The function selector is the first four bytes of the `keccak256` of a function's canonical form. There are several ways to obtain it:
+
+- Use an online tool, such as mine: <https://www.erhant.me/tools/ethertools>
+- Manually compute the hash (e.g. `web3.utils.sha3("someFunc()")` and get the first four bytes of the result.
+- Hop into solidity and write your function, and then call `
+
 ## Sending Ether
 
 A quick reference on how to send `_amount` ethers to some payable address `_to`:
