@@ -51,3 +51,5 @@ int numDigits(int n) {
           return 10; // cant be more
 }
 ```
+
+<https://go.dev/doc/code>
